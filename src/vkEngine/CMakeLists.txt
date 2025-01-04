@@ -1,10 +1,13 @@
 MESSAGE(STATUS "${PLATFORM}")
 
+message(STATUS "stb_SOURCE_DIR: ${stb_SOURCE_DIR}")
+message(STATUS "gltfsdk_SOURCE_DIR: ${gltfsdk_SOURCE_DIR}")
+message(STATUS "fetch_ktx_SOURCE_DIR: ${fetch_ktx_SOURCE_DIR}")
+
 file(GLOB BASE_SRC "*.cpp" "*.hpp" "*.h")
 file(GLOB BASE_HEADERS "*.hpp" "*.h")
 
 add_library(gpuVkEngine ${BASE_SRC} ${BASE_HEADERS})
-target_include_directories(gpuVkEngine PUBLIC .)
 target_include_directories(gpuVkEngine PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   ${gltfsdk_SOURCE_DIR}/GLTFSDK/Inc 
@@ -12,8 +15,6 @@ target_include_directories(gpuVkEngine PUBLIC
   ${fetch_ktx_SOURCE_DIR}/include
   $<INSTALL_INTERFACE:include>
 )
-
-message(${stb_SOURCE_DIR})
 
 # volk_headers or volk, refer to the github
 target_link_libraries(
